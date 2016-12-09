@@ -20,7 +20,12 @@ public class ButtonChooseAnimation : MonoBehaviour {
     int SHOP_TOY = 212;
     int SHOP_COM = 213;
 
-
+	int SHOP_FOOD_DONUT = 221;
+	int SHOP_FOOD_BURGER = 231;
+	int SHOP_FOOD_MILK = 241;
+	int SHOP_TOY_BALL = 222;
+	int SHOP_COM_TOWEL = 223;
+	int SHOP_COM_MED = 233;
 
 	// >>>>> Sine >>>>>
 	// Inventory Field
@@ -96,11 +101,32 @@ public class ButtonChooseAnimation : MonoBehaviour {
     [SerializeField]
     private Image commMask;
 
+	[SerializeField]
+	private Image shopDonutsMask;
+
+	[SerializeField]
+	private Image shopBurgerMask;
+
+	[SerializeField]
+	private Image shopMilkMask;
+
+	[SerializeField]
+	private Image shopBallMask;
+
+	[SerializeField]
+	private Image shopTowelMask;
+
+	[SerializeField]
+	private Image shopMediMask;
+
     public Transform shopTransform;
     public Transform foodTransform;
     public Transform toyTransform;
     public Transform commTransform;
     private bool shopActive = false;
+	private bool foodActive = false;
+	private bool toyActive = false;
+	private bool commActive = false;
 
 
 	// >>>>> Sine >>>>>
@@ -169,6 +195,27 @@ public class ButtonChooseAnimation : MonoBehaviour {
         else if (shopActive) {
             updateShop(cursorPos);
         }
+		else if (cursorPos == SHOP_FOOD)
+		{
+			actMouseAnim(foodMask, foodTransform);
+		}
+		else if (foodActive) {
+			updateFood(cursorPos);
+		}
+		else if (cursorPos == SHOP_TOY)
+		{
+			actMouseAnim(toyMask, toyTransform);
+		}
+		else if (toyActive) {
+			updateToy(cursorPos);
+		}
+		else if (cursorPos == SHOP_COM)
+		{
+			actMouseAnim(commMask, commTransform);
+		}
+		else if (commActive) {
+			updateComm(cursorPos);
+		}
 
 		// >>>>> Sine >>>>>
 		// Inventory Field
@@ -280,10 +327,201 @@ public class ButtonChooseAnimation : MonoBehaviour {
         }
     }
 		
-    void updateShop(int cursorPos) {
+	void updateShop(int cursorPos)
+	{
+		if (cursorPos == SHOP_FOOD)
+		{
+			if (currMask != null)
+			{
+				currMask.gameObject.SetActive(false);
+				foodMask.gameObject.SetActive(true);
+				if (currTrans == shopTransform) {
+					ResetCounter ();
+				}
+				currMask = foodMask;
+				currTrans = foodTransform;
+				actMouseAnim (currMask, currTrans);
+			}
+		}
+		else if (cursorPos == SHOP_TOY)
+		{
+			if (currMask != null)
+			{
+				currMask.gameObject.SetActive(false);
+				toyMask.gameObject.SetActive(true);
+				if (currTrans == shopTransform) {
+					ResetCounter ();
+				}
+				currMask = toyMask;
+				currTrans = toyTransform;
+				actMouseAnim (currMask, currTrans);
+			}
+		}
+		else if (cursorPos == SHOP_COM)
+		{
+			if (currMask != null)
+			{
+				currMask.gameObject.SetActive(false);
+				commMask.gameObject.SetActive(true);
+				if (currTrans == shopTransform) {
+					ResetCounter ();
+				}
+				currMask = commMask;
+				currTrans = commTransform;
+				actMouseAnim (currMask, currTrans);
+			}
+		}
+		// INVENTORY MENU
+		else if (cursorPos == SHOP_TRANS_POS)
+		{
+			if (currMask != null)
+			{
+				if (currTrans != null && currTrans != shopTransform)
+				{
+					currTrans.gameObject.SetActive(false);
+					currTrans = shopTransform;
+				}
+				currMask.gameObject.SetActive(false);
+			}
+		}
+		else
+		{
+			clearTrans();
+			clearActive();
+			currMask = null;
+			currTrans = null;
+			ResetCounter();
+		}
+	}
+		
+//	int SHOP_TOY_BALL = 222;
+//	int SHOP_COM_TOWEL = 223;
+//	int SHOP_COM_MED = 233;
 
+	void updateFood(int cursorPos)
+	{
+		Debug.Log ("Sine : " + cursorPos + currTrans.name);
+		if (cursorPos == SHOP_FOOD_DONUT) {
+			if (currMask != null) {
+				currMask.gameObject.SetActive (false);
+				shopDonutsMask.gameObject.SetActive (true);
+				if (currMask != shopDonutsMask) {
+					ResetCounter ();
+				}
+				currMask = shopDonutsMask;
+				actMouseAnim (currMask, transform);
+			}
+		} else if (cursorPos == SHOP_FOOD_BURGER) {
+			if (currMask != null) {
+				currMask.gameObject.SetActive (false);
+				shopBurgerMask.gameObject.SetActive (true);
+				if (currMask != shopBurgerMask) {
+					ResetCounter ();
+				}
+				currMask = shopBurgerMask;
+				actMouseAnim (currMask, transform);
+			}
+		} else if (cursorPos == SHOP_FOOD_MILK) {
+			if (currMask != null) {
+				currMask.gameObject.SetActive (false);
+				shopMilkMask.gameObject.SetActive (true);
+				if (currMask != shopMilkMask) {
+					ResetCounter ();
+				}
+				currMask = shopMilkMask;
+				actMouseAnim (currMask, transform);
+			}
+		}
+		// INVENTORY MENU
+		else if (cursorPos == SHOP_FOOD) {
+			if (currMask != null) {
+				if (currTrans != null && currTrans != foodTransform) {
+					currTrans.gameObject.SetActive (false);
+					currTrans = foodTransform;
+				}
+				currMask.gameObject.SetActive (false);
+			}
+		} else {
+			clearTrans ();
+			clearActive ();
+			currMask = null;
+			currTrans = null;
+			ResetCounter ();
+		}
+	}
 
-    }
+	void updateToy(int cursorPos)
+	{
+		if (cursorPos == SHOP_TOY_BALL) {
+			if (currMask != null) {
+				currMask.gameObject.SetActive (false);
+				shopBallMask.gameObject.SetActive (true);
+				if (currMask != shopBallMask) {
+					ResetCounter ();
+				}
+				currMask = shopBallMask;
+				actMouseAnim (currMask, transform);
+			}
+		}
+		// INVENTORY MENU
+		else if (cursorPos == SHOP_TOY) {
+			if (currMask != null) {
+				if (currTrans != null && currTrans != toyTransform) {
+					currTrans.gameObject.SetActive (false);
+					currTrans = toyTransform;
+				}
+				currMask.gameObject.SetActive (false);
+			}
+		} else {
+			clearTrans ();
+			clearActive ();
+			currMask = null;
+			currTrans = null;
+			ResetCounter ();
+		}
+	}
+
+	void updateComm(int cursorPos)
+	{
+		if (cursorPos == SHOP_COM_TOWEL) {
+			if (currMask != null) {
+				currMask.gameObject.SetActive (false);
+				shopTowelMask.gameObject.SetActive (true);
+				if (currMask != shopTowelMask) {
+					ResetCounter ();
+				}
+				currMask = shopTowelMask;
+				actMouseAnim (currMask, transform);
+			}
+		} else if (cursorPos == SHOP_COM_MED) {
+			if (currMask != null) {
+				currMask.gameObject.SetActive (false);
+				shopMediMask.gameObject.SetActive (true);
+				if (currMask != shopMediMask) {
+					ResetCounter ();
+				}
+				currMask = shopMediMask;
+				actMouseAnim (currMask, transform);
+			}
+		}
+
+		// INVENTORY MENU
+		else if (cursorPos == SHOP_COM) {
+			if (currMask != null) {
+				if (currTrans != null && currTrans != commTransform) {
+					currTrans.gameObject.SetActive (false);
+					currTrans = commTransform;
+				}
+				currMask.gameObject.SetActive (false);
+			}
+		} else {
+			clearTrans ();
+			clearActive ();
+			currMask = null;
+			currTrans = null;
+			ResetCounter ();
+		}
+	}
 
 	// >>>>> Sine >>>>>
 	void updateInven(int cursorPos) {
@@ -424,6 +662,23 @@ public class ButtonChooseAnimation : MonoBehaviour {
         cleanTransform.gameObject.SetActive(false);
         healthTransform.gameObject.SetActive(false);
 
+		shopMask.gameObject.SetActive(false);
+		foodMask.gameObject.SetActive(false);
+		toyMask.gameObject.SetActive(false);
+		commMask.gameObject.SetActive(false);
+
+		shopBurgerMask.gameObject.SetActive(false);
+		shopDonutsMask.gameObject.SetActive(false);
+		shopMilkMask.gameObject.SetActive(false);
+		shopBallMask.gameObject.SetActive(false);
+		shopTowelMask.gameObject.SetActive(false);
+		shopMediMask.gameObject.SetActive(false);
+
+		shopTransform.gameObject.SetActive(false);
+		foodTransform.gameObject.SetActive(false);
+		toyTransform.gameObject.SetActive(false);
+		commTransform.gameObject.SetActive(false);
+
 		// >>>>> Sine >>>>>
 		inventoryTransform.gameObject.SetActive(false);
 		inventoryMask.gameObject.SetActive (false);
@@ -433,6 +688,9 @@ public class ButtonChooseAnimation : MonoBehaviour {
 	void clearActive() {
         conditionActive = false;
         shopActive = false;
+		foodActive = false;
+		toyActive = false;
+		commActive = false;
 
 		// >>>>> Sine >>>>>
 		inventoryActive = false;
@@ -471,9 +729,66 @@ public class ButtonChooseAnimation : MonoBehaviour {
             }
             return CONDITION_TRANS_POS;
         }
-        else if (120 >= pos.x && 20 <= pos.x && 120 >= pos.y &&  20 <= pos.y) {
-            return SHOP_BUTTON_POS;
-        }
+        
+		else if (120 >= pos.x && 20 <= pos.x && 120 >= pos.y && 20 <= pos.y)
+		{
+			return SHOP_BUTTON_POS;
+		}
+		else if (kwidth - 100 >= pos.x && 100 <= pos.x && kheight - 100 >= pos.y && 100 <= pos.y)
+		{
+			if (shopActive)
+			{
+				if (pos.x >= 100 && pos.x <= 380 && pos.y >= 120 && pos.y <= kheight - 120)
+				{
+					return SHOP_FOOD;
+				}
+				else if (pos.x >= 420 && pos.x <= 600 && pos.y >= 120 && pos.y <= kheight - 120)
+				{
+					return SHOP_TOY;
+				}
+				else if (pos.x >= 640 && pos.x <= 920 && pos.y >= 120 && pos.y <= kheight - 120)
+				{
+					return SHOP_COM;
+				}
+			}
+			else if (foodActive)
+			{
+				if (pos.x >= 110 && pos.x <= 230 && pos.y >= kheight - 220 && pos.y <= kheight - 100)
+				{
+					return SHOP_FOOD_BURGER;
+				}
+				else if (pos.x >= (kwidth / 2) - 60 && pos.x <= (kwidth / 2) + 60 && pos.y >= kheight - 220 && pos.y <= kheight - 100)
+				{
+					return SHOP_FOOD_DONUT;
+				}
+				else if (pos.x >= kwidth - 230 && pos.x <= kwidth - 110 && pos.y >= kheight - 220 && pos.y <= kheight - 100)
+				{
+					return SHOP_FOOD_MILK;
+				}
+				return SHOP_FOOD;
+			}
+			else if (toyActive)
+			{
+				if (pos.x >= (kwidth / 2) - 60 && pos.x <= (kwidth / 2) + 60 && pos.y >= kheight - 220 && pos.y <= kheight - 100)
+				{
+					return SHOP_TOY_BALL;
+				}
+				return SHOP_TOY;
+			}
+			else if (commActive)
+			{
+				if (pos.x >= 110 && pos.x <= 230 && pos.y >= kheight - 220 && pos.y <= kheight - 100)
+				{
+					return SHOP_COM_TOWEL;
+				}
+				else if (pos.x >= kwidth - 230 && pos.x <= kwidth - 110 && pos.y >= kheight - 220 && pos.y <= kheight - 100)
+				{
+					return SHOP_COM_MED;
+				}
+				return SHOP_COM;
+			}
+			return SHOP_TRANS_POS;
+		}
 
 		// >>>>> Sine >>>>>
 		else if (kwidth - 20 >= pos.x && kwidth - 220 <= pos.x && kheight >= pos.y && kheight - 450 <= pos.y) {
@@ -523,6 +838,60 @@ public class ButtonChooseAnimation : MonoBehaviour {
             if (mask == conditionMask) {
                 conditionActive = true;
             }
+
+			if (mask == shopMask) {
+				shopActive = true;
+			}
+			if (mask == foodMask) {
+				shopTransform.gameObject.SetActive (false);
+				foodTransform.gameObject.SetActive(true);
+				clearActive();
+				foodActive = true;
+			}
+			if (mask == toyMask) {
+				shopTransform.gameObject.SetActive (false);
+				toyTransform.gameObject.SetActive(true);
+				clearActive();
+				toyActive = true;
+			}
+			if (mask == commMask) {
+				shopTransform.gameObject.SetActive (false);
+				commTransform.gameObject.SetActive(true);
+				clearActive();
+				commActive = true;
+			}
+
+			if (mask == shopBurgerMask) {
+				foodTransform.gameObject.SetActive (false);
+				clearActive();
+				clearTrans ();
+			}
+			if (mask == shopDonutsMask) {
+				foodTransform.gameObject.SetActive (false);
+				clearActive();
+				clearTrans ();
+			}
+			if (mask == shopMilkMask) {
+				foodTransform.gameObject.SetActive (false);
+				clearActive();
+				clearTrans ();
+			}
+			if (mask == shopBallMask) {
+				toyTransform.gameObject.SetActive (false);
+				clearActive();
+				clearTrans ();
+			}
+			if (mask == shopTowelMask) {
+				commTransform.gameObject.SetActive (false);
+				clearActive();
+				clearTrans ();
+			}
+			if (mask == shopMediMask) {
+				commTransform.gameObject.SetActive (false);
+				clearActive();
+				clearTrans ();
+			}
+
 
 			// >>>>> Sine >>>>>
 			if (mask == inventoryMask) {

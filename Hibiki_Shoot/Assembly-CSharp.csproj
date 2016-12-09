@@ -87,7 +87,7 @@
      <None Include="Assets\cu_cat\Shaders\CuCatShader.shader" />
      <None Include="Assets\MedCons\ReadMe.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>/Users/Sine/Desktop/cs490/Hibiki_Shoot/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>/Users/Sine/Desktop/CS490-Demo2/cs490/Hibiki_Shoot/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
@@ -99,10 +99,10 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Data.Sqlite">
- <HintPath>/Users/Sine/Desktop/cs490/Hibiki_Shoot/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
+ <HintPath>/Users/Sine/Desktop/CS490-Demo2/cs490/Hibiki_Shoot/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
  </Reference>
  <Reference Include="System.Data">
- <HintPath>/Users/Sine/Desktop/cs490/Hibiki_Shoot/Assets/Plugins/System.Data.dll</HintPath>
+ <HintPath>/Users/Sine/Desktop/CS490-Demo2/cs490/Hibiki_Shoot/Assets/Plugins/System.Data.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
